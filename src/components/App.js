@@ -29,6 +29,10 @@ class BooksApp extends Component {
   getAllBooks() {
     BooksAPI.getAll().then((booksList) => {
       let booksMap = new Map();
+      //Here I am just grouping the books in the array based on its shelve and 
+      //placing the same in the MAP object. Based on the suggestion i tried
+      //using map and filter function of array but i couldnt achieve this, 
+      //requesting you to let me know how to do this.
       booksList.forEach(function (book) {
         if (booksMap.has(book.shelf)) {
           let tempArray = booksMap.get(book.shelf);
@@ -41,7 +45,7 @@ class BooksApp extends Component {
         }
       });
       const shelf = { books: booksMap };
-      this.setState({ shelf: shelf });
+      this.setState({ shelf: shelf});
     });
   }
 
@@ -54,7 +58,7 @@ class BooksApp extends Component {
         )} />
 
         <Route path="/Search" render={({ history }) => (
-          <BooksSearch history={history} onCloseSearch={() => {
+          <BooksSearch currentBookList={Array.from(this.state.shelf.books.values())} history={history} onCloseSearch={() => {
             this.getAllBooks();
             history.push('/');
           }} />

@@ -30,36 +30,32 @@ class searchBooks extends Component {
     }
   }
 
-
   searchBooks(query) {
     const maxResults = 20;
+    debugger;
+    let currentBooks = this.props.currentBookList;
     if (query.trim() === "") {
       this.setState({ books: [], query: "" });
     } else {
       BooksAPI.search(query, maxResults).then((booksList) => {
         if (booksList !== null && booksList !== undefined && booksList.length > 0) {
-          let booksInShelf = [];
-          BooksAPI.getAll().then((booksListFromGetAll) => {
-            booksListFromGetAll.forEach(function (book) {
-              booksInShelf.push(book);
-            });
-            
-            let tmpBooksList = [];
-            booksList.forEach(function (book) {
-              let foundBook = null;
-              for(let bookInShelf of booksInShelf){
-                if(bookInShelf.id === book.id){
+          let tmpBooksList = [];
+          booksList.forEach(function (book) {
+            let foundBook = null;
+            for (let bookArrInShelf of currentBooks) {
+              for (let bookInShelf of bookArrInShelf) {
+                if (bookInShelf.id === book.id) {
                   foundBook = bookInShelf;
                   break;
                 }
               }
-              if (foundBook !== null && foundBook !== undefined) {
-                book.shelf = foundBook.shelf;
-              }
-              tmpBooksList.push(book);
-            });
-            this.setState({ books: tmpBooksList, query: query });
+            }
+            if (foundBook !== null && foundBook !== undefined) {
+              book.shelf = foundBook.shelf;
+            }
+            tmpBooksList.push(book);
           });
+          this.setState({ books: tmpBooksList, query: query });
         } else {
           this.setState({ books: [], query: query });
         }

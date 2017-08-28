@@ -1,23 +1,15 @@
 # MyReads_LendingApp
 
-Main page displays a list of "shelves" (i.e. categories), each of which contains a number of books. The three shelves are:
+MyReads is a lending application where it classfies the books based on categories like "Currently Reading", "Want to Read" and "Read". Here the categories are called as Shelves. User can move the books from one shelf to another in the Main page and also the user can search for available books from where they can choose the shelve they wanted.
 
-	Currently Reading
-	Want to Read
-	Read
+This project has been created as part of my nanadegree course with Udacity.com
 
 
-Each book has a control that lets us to select the shelf for that book. When we select a different shelf, the book moves there. 
-The default value for the control will always be the current shelf the book is in. Whenever we select a different shelf, the book moves there
-along with the notification mentioning that the selected book moved to particular shelf.
+This project is built using ReactJS framework.
 
-The main page also has a link to /search, a search page that allows us to find books to add to our library.
-The search page has a text input that may be used to find books. As the value of the text input changes, 
-the books that match that query are displayed on the page, along with a control that lets you add the book to our library. 
 
-When we click on the book image in the Main page, it will take the user to the Book details which will give more information about that book.
-Then user can use the move back link to come back to Main page
+In order to run this application use the following commands
 
-When we click on the book image in the Search Page, it will take the user to the Book details which will give more information about that book.
-Then user can use the move back link to come back to Search Page. When we move back to search page, the search page will be populated with the
-search term along with the books of that search term.
+		npm install - to install all the necessary libraries.
+		npm start  - to launch the application.
+
